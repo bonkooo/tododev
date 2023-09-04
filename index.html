@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoDev</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ToDoDev - To Do List for Developers</h1>
+            <p>Project name: <span id="project-name">My Project</span></p>
+        </header>
+        <main>
+            <form class="main-form">
+                <input type="text" placeholder="Enter Task Name..." class="task-input" required>
+                <button type="submit" class="btn">Add Task</button>
+            </form>
+            <ul class="task-list">
+                <!-- tasks will be added here -->
+                <!-- <li>
+                    <p class="task-text">Task 1</p>
+                    <button class="delete-btn">Delete Task</button>
+                </li>
+                <li>
+                    <p class="task-text">Task 2</p>
+                    <button class="delete-btn">Delete Task</button>
+                </li> -->
+        </main>
+    </div>
+
+    <!-- task description modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h1 class="task-name-modal"></h1>
+            <p class="task-description-modal"></p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
