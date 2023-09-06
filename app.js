@@ -96,6 +96,12 @@ function displayTaskDescription (taskId) {
     }
 }
 
+document.body.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
 closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
 });
