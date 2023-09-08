@@ -7,9 +7,19 @@ const taskDescription = document.querySelector(".task-description-modal");
 const closeBtn = document.querySelector(".close-modal");
 const taskDescriptionInput = document.querySelector(".task-description-input");
 const saveDescriptionBtn = document.querySelector(".save-description-btn");
+const editIcon = document.getElementById("edit-project-name");
 
 // prompt the user to enter project name
 projectName.textContent = prompt("Enter project name: ") || "My project";
+
+//edit project name
+editIcon.addEventListener("click", () => {
+    const newProjectName = prompt("Enter a new project name:", projectName.textContent);
+    
+    if (newProjectName !== null) {
+        projectName.textContent = newProjectName;
+    }
+});
 
 taskForm.addEventListener("submit", addTask);
 
