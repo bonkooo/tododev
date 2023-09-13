@@ -7,7 +7,7 @@ const taskDescriptionInput = document.querySelector(".task-description-input");
 const saveDescriptionBtn = document.querySelector(".save-description-btn");
 const editIcon = document.getElementById("edit-project-name");
 
-// Load project name from local storage or set a default value
+// load project name from local storage
 let storedProjectName = localStorage.getItem("projectName");
 if (!storedProjectName) {
   storedProjectName = prompt("Enter project name:") || "My Project";
@@ -15,10 +15,10 @@ if (!storedProjectName) {
 }
 projectName.textContent = storedProjectName;
 
-// Load tasks from local storage on page load
+// load tasks from local storage on page load
 let tasksWithDescriptions = JSON.parse(localStorage.getItem("tasks")) || [];
 
-// Populate the UI with tasks from local storage
+// populate the UI with tasks from local storage
 function populateTasks() {
   taskList.innerHTML = "";
   tasksWithDescriptions.forEach(task => {
@@ -28,13 +28,12 @@ function populateTasks() {
 
 populateTasks();
 
-// Edit project name
+// edit project name
 editIcon.addEventListener("click", () => {
   const newProjectName = prompt("Enter a new project name:", projectName.textContent);
 
   if (newProjectName !== null) {
     projectName.textContent = newProjectName;
-    // Save the updated project name to local storage
     localStorage.setItem("projectName", newProjectName);
   }
 });
@@ -55,13 +54,13 @@ function addTask(e) {
     text: taskText,
     id: Date.now(),
     completed: false,
-    description: "", // Initialize description as empty
+    description: "", 
   };
 
   addTaskToList(task);
   taskInput.value = "";
 
-  // Save the updated tasks to local storage
+  // save the updated tasks to local storage
   tasksWithDescriptions.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
 }
@@ -82,7 +81,7 @@ function addTaskToList(task) {
   taskList.appendChild(taskItem);
 }
 
-// Create an event handler for the task list
+// create an event handler
 taskList.addEventListener("click", handleTaskActions);
 
 function handleTaskActions(e) {
@@ -90,13 +89,13 @@ function handleTaskActions(e) {
     const taskId = e.target.getAttribute("data-id");
     const taskItem = e.target.parentElement;
 
-    // find index of the task object element in the array by its data id property
+    // find index of the task object element in the array by its data id
     const taskIndex = tasksWithDescriptions.findIndex(task => task.id === parseInt(taskId));
 
     if (taskIndex !== -1) {
       // check if the taskIndex is found in the array
       tasksWithDescriptions.splice(taskIndex, 1); // remove the task object from the array
-      // Save the updated tasks to local storage after deletion
+      // save the updated tasks to local storage after deletion
       localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
     }
 
@@ -122,7 +121,7 @@ function displayTaskDescription(taskId) {
     saveDescriptionBtn.addEventListener("click", () => {
       task.description = taskDescriptionInput.value;
       modal.style.display = "none";
-      // Save the updated tasks to local storage after editing description
+      // save the updated tasks to local storage after editing description
       localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
     });
   }
