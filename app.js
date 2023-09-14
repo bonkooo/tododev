@@ -6,6 +6,7 @@ const modal = document.querySelector(".modal");
 const taskDescriptionInput = document.querySelector(".task-description-input");
 const saveDescriptionBtn = document.querySelector(".save-description-btn");
 const editIcon = document.getElementById("edit-project-name");
+const closeBtn = document.querySelector(".close-modal")
 
 // load project name from local storage
 let storedProjectName = localStorage.getItem("projectName");
