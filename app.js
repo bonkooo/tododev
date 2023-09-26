@@ -119,14 +119,23 @@ function displayTaskDescription(taskId) {
 
     modal.style.display = "block";
 
-    saveDescriptionBtn.addEventListener("click", () => {
-      task.description = taskDescriptionInput.value;
-      modal.style.display = "none";
-      // save the updated tasks to local storage after editing description
-      localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
-    });
+    // set task id as a data attribute for the button
+    saveDescriptionBtn.setAttribute("data-task-id", taskId);
   }
 }
+
+// save description button retrieves the task id
+saveDescriptionBtn.addEventListener("click", () => {
+  const taskId = parseInt(saveDescriptionBtn.getAttribute("data-task-id"));
+  const task = tasksWithDescriptions.find(task => task.id === taskId);
+
+  if (task) {
+    task.description = taskDescriptionInput.value;
+    modal.style.display = "none";
+    // save the updated tasks to local storage after editing description
+    localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
+  }
+});
 
 document.body.addEventListener("click", (e) => {
   if (e.target === modal) {
