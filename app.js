@@ -66,21 +66,59 @@ function addTask(e) {
   localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
 }
 
+taskList.addEventListener("change", handleTaskCheckbox);
+
+function handleTaskCheckbox(e) {
+    if (e.target.classList.contains("task-checkbox")) {
+        const taskId = parseInt(e.target.nextElementSibling.nextElementSibling.getAttribute("data-id"));
+        const taskItem = e.target.parentElement;
+
+        // find the task object by its ID
+        const task = tasksWithDescriptions.find(task => task.id === taskId);
+
+        if (task) {
+            task.completed = e.target.checked; 
+            if (e.target.checked) {
+                taskItem.classList.add("completed"); 
+            } else {
+                taskItem.classList.remove("completed"); 
+            }
+
+            localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
+        }
+    }
+
+    if (task) {
+      task.completed = e.target.checked; 
+      const taskTextElement = taskItem.querySelector(".task-text");
+  
+      if (e.target.checked) {
+          taskTextElement.classList.add("completed"); 
+      } else {
+          taskTextElement.classList.remove("completed"); 
+      }
+  
+      localStorage.setItem("tasks", JSON.stringify(tasksWithDescriptions));
+  }
+}
+
 // create task item element and add it to the list of tasks
 function addTaskToList(task) {
   const taskItem = document.createElement("li");
   taskItem.innerHTML = `
-    <span class="task-text">${task.text}</span>
-    <button data-id="${task.id}" class="delete-btn">Delete</button>
+      <input type="checkbox" class="task-checkbox" ${task.completed ? "checked" : ""}>
+      <span class="task-text">${task.text}</span>
+      <button data-id="${task.id}" class="delete-btn">Delete</button>
   `;
 
   if (task.completed) {
-    taskItem.classList.add("completed");
+      taskItem.classList.add("completed");
   }
 
-  // add task item to the unordered list
+  // Add task item to the unordered list
   taskList.appendChild(taskItem);
 }
+
 
 // create an event handler
 taskList.addEventListener("click", handleTaskActions);
